@@ -47,14 +47,12 @@ formElement.addEventListener('submit', formSubmitHandler);
 //-----------------------------Лайки--------------------------------//
 const likeElement = document.querySelectorAll('.card__like-button');
 const likeActiveElement = document.querySelector('card__like-button_active');
-console.log(likeElement);
 const handleLike = (event) => {
   if (event.target.classList.contains('card__like-button_active')) {
     event.target.classList.remove('card__like-button_active');
     return;
   }
   event.target.classList.add('card__like-button_active');
-  console.log(event.target.getAttribute('data-id'));
 }
 likeElement.forEach(element => {
   element.onclick = handleLike
