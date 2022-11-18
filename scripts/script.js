@@ -1,6 +1,6 @@
 const popupElement = document.querySelector('.popup');
 const popupCloseButtonElement = popupElement.querySelector('.popup__close');
-const popupOpenButtonElement = document.querySelector('.popup__opened');
+const popupProfileEditElement = document.querySelector('.profile__edit-button');
 const pageElement = document.querySelector('.page');
 const profileName = pageElement.querySelector('.profile__title');
 const profileJob = pageElement.querySelector('.profile__subtitle');
@@ -23,7 +23,7 @@ const closePopupByClickOnOverlay = function (event) {
   }
   closePopup();
 }
-popupOpenButtonElement.addEventListener('click', openPopup);
+popupProfileEditElement.addEventListener('click', openPopup);
 popupCloseButtonElement.addEventListener('click', closePopup);
 popupElement.addEventListener('click', closePopupByClickOnOverlay);
 // -----------------------------------------------------//
