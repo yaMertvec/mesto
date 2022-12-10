@@ -15,6 +15,14 @@ const popupPlace = document.querySelector('.popup__input_data_place');
 const popupPlaceLink = document.querySelector('.popup__input_data_place-link');
 const popupCloseCardAdd = document.querySelector('.popup__close_card-add');
 const popupCloseImage = document.querySelector('.popup__close_image');
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
+const popupImage = document.querySelector('.popup_image');
+const listElements = document.querySelector('.elements');
+const popupProfileEdit = document.querySelector('.popup_type-edit');
+const closePopupEditProfile = document.querySelector('.popup__close_edit-profile');
+const likeElement = document.querySelector('.card__like-button');
+popupDescription = document.querySelector('.popup__description');
+popupImageElement = document.querySelector('.popup__image-element');
 const initialCards = [
   {
     name: 'Архыз',
@@ -43,104 +51,86 @@ const initialCards = [
 ];
 
 
-const handleDeleteButtonClick = (e) => {
-  e.target.closest('.card').remove();
-}
-//       Добавление карточки //
+//       Добавление карточки     //
 
 const generateCard = (item) => {
-  const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
   const card = cardTemplate.cloneNode(true);
   const cardTitle = card.querySelector('.card__title');
-  cardTitle.textContent = item.name;
   const cardImage = card.querySelector('.card__image');
-  cardImage.alt = item.name
-  cardImage.src = item.link
-  const openImagePopup = function () {
-    popupImage.classList.add('popup_opened');
-  }
-  const imagePopupHandler = (e) => {
-    popupImageElement.src = e.target.src;
-    popupImageElement.alt = e.target.closest('.card').querySelector('.card__title').textContent;
-    popupDescription.textContent = e.target.closest('.card').querySelector('.card__title').textContent;
-    openImagePopup();
-  }
-
-  cardImage.addEventListener('click', imagePopupHandler);
-  const closeImagePopup = function () {
-    popupImage.classList.remove('popup_opened');
-  }
-  popupCloseImage.addEventListener('click', closeImagePopup);
-
-
-  popupDescription = document.querySelector('.popup__description');
-
-  cardImage.addEventListener('click', openImagePopup);
+  const deleteButton = card.querySelector('.card__delete-button');
+  deleteButton.addEventListener('click', handleDeleteButton);
+  const likeElement = card.querySelector('.card__like-button');
+  likeElement.addEventListener('click', handleLikeButton);
+  cardTitle.textContent = item.name;
+  cardImage.alt = item.name;
+  cardImage.src = item.link;
+  cardImage.addEventListener('click',handleOpenImagePopup);
   return card;
-}
-
-const renderCard = (item) => {
-  const card = generateCard(item)
-  listElements.prepend(card)
-  const deleteButton = document.querySelector('.card__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
 };
 
-const listElements = document.querySelector('.elements');
-initialCards.forEach(item => {
-  renderCard(item);
+//--------------------открытие и закрытие попапа с изображением --------------------//
+const handleOpenImagePopup = (e) => {
+  popupImageElement.src = e.target.src
+  popupImageElement.alt = e.target.closest('.card').querySelector('.card__title').textContent;
+  popupDescription.textContent = e.target.closest('.card').querySelector('.card__title').textContent;
+  openPopup(popupImage);
+}
+
+//--------------удаление------------//
+const handleDeleteButton = (e) => {
+  e.target.closest('.card').remove();
+};
+//-----------------лайки----------------//
+
+const handleLikeButton = (e) => {
+  e.target.classList.toggle('card__like-button_active');
+};
+//-------------------------------------//
+const renderCard = (item) => {
+  const card = generateCard(item);
+  listElements.prepend(card)
+};
+initialCards.forEach((item) => {
+  renderCard(item, listElements);
 });
+//------------------------------------------------------------------------------//
 
-////////////////////////////////////////////////////////////////////
+//------------------------профиль------------------//
 
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+};
 
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+};
 
-
-
-const openAddCardPopup = function () {
-  popupCardAdd.classList.add('popup_opened');
-}
-const closeAddCardPopup = function () {
-  popupCardAdd.classList.remove('popup_opened');
-}
-const openPopup = function () {
-  popupElement.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-}
-const closePopup = function () {
-  popupElement.classList.remove('popup_opened');
-}
-
-function formSubmitHandler(evt) {
-  evt.preventDefault();
+function HandlerFormSubmit(e) {
+  e.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup();
+  closePopup(popupProfileEdit);
 }
 
+formElement.addEventListener('submit', HandlerFormSubmit);
+popupProfileEditElement.addEventListener('click', () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(popupProfileEdit);
+});
+popupCloseButtonElement.addEventListener('click', () => {
+  closePopup(popupProfileEdit);
+});
+//--------------------------------------------------------//
 
-// const closePopupByClickOnOverlay = function (event) {
-//   console.log(event.target, event.currentTarget);
-//   if (event.target !== event.currentTarget) {
-//     return;
-//   }
-//   closePopup();
-// }
-
-
-// ----------------------обработчик--------------------------- //
-formElement.addEventListener('submit', formSubmitHandler);
-formElementAdd.addEventListener('submit', handleFormSubmit);
-popupProfileEditElement.addEventListener('click', openPopup);
-popupCloseButtonElement.addEventListener('click', closePopup);
-popupCloseCardAdd.addEventListener('click', closeAddCardPopup);
-popupAddButtonElement.addEventListener('click', openAddCardPopup);
-
-// popupElement.addEventListener('click', closePopupByClickOnOverlay);
-// -----------------------------------------------------//
-
-
+//--------------------открываем и закрываем попап с добавлением карточки ---------------//
+popupAddButtonElement.addEventListener('click', () => {
+  openPopup(popupCardAdd);
+})
+popupCloseCardAdd.addEventListener('click', () => {
+  closePopup(popupCardAdd);
+})
+//---------------добавление карточки---------------//
 
 function handleFormSubmit(e) {
   e.preventDefault();
@@ -150,43 +140,12 @@ function handleFormSubmit(e) {
   }
 
   renderCard(card, listElements)
-  closeAddCardPopup();
+  closePopup(popupCardAdd);
   popupPlace.value = '';
   popupPlaceLink.value = '';
-  const deleteButton = document.querySelector('.card__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
-  const likeElement = document.querySelectorAll('.card__like-button');
-  const likeActiveElement = document.querySelector('card__like-button_active');
-  likeElement.forEach(element => {
-    element.onclick = handleLike
-  });
-
-  const popupImage = document.querySelector('.popup_image');
-  const cardImage = document.querySelector('.card__image');
-  const openImagePopup = function () {
-    popupImage.classList.add('popup_opened');
-  }
-  cardImage.addEventListener('click', openImagePopup);
 }
+formElementAdd.addEventListener('submit', handleFormSubmit);
 
-const likeElement = document.querySelectorAll('.card__like-button');
-const likeActiveElement = document.querySelector('card__like-button_active');
-
-const handleLike = (event) => {
-  if (event.target.classList.contains('card__like-button_active')) {
-    event.target.classList.remove('card__like-button_active');
-    return;
-  }
-  event.target.classList.add('card__like-button_active');
-}
-likeElement.forEach(element => {
-  element.onclick = handleLike
-});
-
-const popupImage = document.querySelector('.popup_image');
-const cardImage = document.querySelector('.card__image');
-popupImageElement = document.querySelector('.popup__image-element');
-const openImagePopup = function () {
-
-  popupImage.classList.add('popup_opened');
-}
+popupCloseImage.addEventListener('click' , () => {
+  closePopup(popupImage);
+})
