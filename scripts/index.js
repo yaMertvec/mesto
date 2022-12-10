@@ -20,9 +20,8 @@ const popupImage = document.querySelector('.popup_image');
 const listElements = document.querySelector('.elements');
 const popupProfileEdit = document.querySelector('.popup_type-edit');
 const closePopupEditProfile = document.querySelector('.popup__close_edit-profile');
-const likeElement = document.querySelector('.card__like-button');
-popupDescription = document.querySelector('.popup__description');
-popupImageElement = document.querySelector('.popup__image-element');
+const popupDescription = document.querySelector('.popup__description');
+const popupImageElement = document.querySelector('.popup__image-element');
 const initialCards = [
   {
     name: 'Архыз',
@@ -105,14 +104,14 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 };
 
-function HandlerFormSubmit(e) {
+function handlerFormSubmit(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupProfileEdit);
 }
 
-formElement.addEventListener('submit', HandlerFormSubmit);
+formElement.addEventListener('submit', handlerFormSubmit);
 popupProfileEditElement.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
