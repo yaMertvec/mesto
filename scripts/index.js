@@ -22,6 +22,7 @@ const popupProfileEdit = document.querySelector('.popup_type-edit');
 const closePopupEditProfile = document.querySelector('.popup__close_edit-profile');
 const popupDescription = document.querySelector('.popup__description');
 const popupImageElement = document.querySelector('.popup__image-element');
+const escapeButton = 'Escape'
 const initialCards = [
   {
     name: 'Архыз',
@@ -98,10 +99,12 @@ initialCards.forEach((item) => {
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByDownEscButton);
 };
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByDownEscButton);
 };
 
 function handlerFormSubmit(e) {
@@ -148,3 +151,22 @@ formElementAdd.addEventListener('submit', handleFormSubmit);
 popupCloseImage.addEventListener('click' , () => {
   closePopup(popupImage);
 })
+
+
+
+
+const closePopupByDownEscButton = (e) => {
+  const openPopup = document.querySelector('.popup_opened');
+  if (e.key === escapeButton) {
+    closePopup(openPopup);
+  }
+}
+//--------------------закрытие попапа кликом на оверлей--------------------//
+const popupElements = document.querySelectorAll('.popup');
+const closePopupByClickOnOverlay = (e) => {
+  const openPopup = document.querySelector('.popup_opened');
+  if (e.target === e.currentTarget) {
+    closePopup(openPopup);
+  }
+}
+popupElements.forEach((element) => element.addEventListener('click', closePopupByClickOnOverlay));

@@ -35,10 +35,14 @@
   <div class="popup popup_type-edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="popupForm">
-        <input required type="text" name="userName" placeholder="Имя" class="popup__input popup__input_data_name">
-        <input required type="text" name="userJob" placeholder="Работа" class="popup__input popup__input_data_job">
-        <button class="popup__submit" type="submit">Сохранить
+      <form class="popup__form popup__edit" name="popupForm">
+        <input required minlength="2" maxlength="40" type="text" name="userName" placeholder="Имя"
+          class="popup__input popup__input_data_name" id="data_name">
+        <span class="error" id="data_name-error"></span>
+        <input required minlength="2" maxlength="200" type="text" name="userJob" placeholder="Работа"
+          class="popup__input popup__input_data_job" id="data_job">
+        <span class="error" id="data_job-error"></span>
+        <button class="popup__button" type="submit">Сохранить
         </button>
       </form>
       <button type="button" class="popup__close popup__close_edit-profile"></button>
@@ -48,10 +52,13 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form popup__add" name="popupFormCardAdd">
-        <input required type="text" name="placeName" placeholder="Введите название" class="popup__input popup__input_data_place">
-        <input required type="text" name="placeLink" placeholder="Введите ссылку"
-          class="popup__input popup__input_data_place-link">
-        <button class="popup__submit" type="submit">Создать
+        <input required type="text" name="placeName" placeholder="Введите название"
+          class="popup__input popup__input_data_place" id="data_place" minlength="2" maxlength="30" type="text">
+        <span class="error" id="data_place-error"></span>
+        <input required type="url" name="placeLink" placeholder="Введите ссылку"
+          class="popup__input popup__input_data_place-link" id="data_place-link">
+        <span class="error" id="data_place-link-error"></span>
+        <button class="popup__button popup__button_disabled" type="submit">Создать
         </button>
       </form>
       <button type="button" class="popup__close popup__close_card-add"></button>
@@ -79,6 +86,7 @@
     </li>
   </template>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 
 </body>
 
