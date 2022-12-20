@@ -10,7 +10,7 @@ font-family: 'Inter', Arial, sans-serif;
 font-weight: 400;
 font-size: 18px;
 line-height: 22px;
-margin-top:48px;
+margin-top:18px;
 }
 
 .popup__button:hover {
@@ -24,6 +24,6 @@ margin-top:48px;
     line-height: 17px;
     text-align: center;
     height: 46px;
-    margin-top:45px;
+    margin-top:15px;
   }
 }
