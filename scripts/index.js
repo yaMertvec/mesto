@@ -1,3 +1,8 @@
+import {Card} from "./Card.js";
+import {initialCards} from "./initialCards.js";
+import { FormValidator} from "./FormValidator.js";
+import { config } from "./config.js";
+
 //-------------------------------переменные----------------------//
 // const popupElement = document.querySelector('.popup');
 const popupProfileEdit = document.querySelector('.popup_type-edit');
@@ -24,75 +29,30 @@ const closePopupEditProfile = document.querySelector('.popup__close_edit-profile
 const popupDescription = document.querySelector('.popup__description');
 const popupImageElement = document.querySelector('.popup__image-element');
 const escapeButton = 'Escape'
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 
-//       Добавление карточки     //
 
-const generateCard = (item) => {
-  const card = cardTemplate.cloneNode(true);
-  const cardTitle = card.querySelector('.card__title');
-  const cardImage = card.querySelector('.card__image');
-  const deleteButton = card.querySelector('.card__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButton);
-  const likeElement = card.querySelector('.card__like-button');
-  likeElement.addEventListener('click', handleLikeButton);
-  cardTitle.textContent = item.name;
-  cardImage.alt = item.name;
-  cardImage.src = item.link;
-  cardImage.addEventListener('click',handleOpenImagePopup);
-  return card;
-};
+
 
 //--------------------открытие и закрытие попапа с изображением --------------------//
-const handleOpenImagePopup = (e) => {
-  popupImageElement.src = e.target.src
-  popupImageElement.alt = e.target.closest('.card').querySelector('.card__title').textContent;
-  popupDescription.textContent = e.target.closest('.card').querySelector('.card__title').textContent;
+const handleOpenImagePopup = (name,link) => {
+  popupImageElement.src = link;
+  popupImageElement.alt = name;
+  popupDescription.textContent = name;
+  // popupImageElement.src = e.target.src
+  // popupImageElement.alt = e.target.closest('.card').querySelector('.card__title').textContent;
+  // popupDescription.textContent = e.target.closest('.card').querySelector('.card__title').textContent;
   openPopup(popupImage);
 }
 
-//--------------удаление------------//
-const handleDeleteButton = (e) => {
-  e.target.closest('.card').remove();
-};
-//-----------------лайки----------------//
 
-const handleLikeButton = (e) => {
-  e.target.classList.toggle('card__like-button_active');
-};
-//-------------------------------------//
-const renderCard = (item) => {
-  const card = generateCard(item);
-  listElements.prepend(card)
+const renderCard = (item,qwer) => {
+  const card = new Card(item,`#card-template`,handleOpenImagePopup);
+  const cardElement = card.generateCard();
+  qwer.prepend(cardElement)
 };
 initialCards.forEach((item) => {
-  renderCard(item);
+  renderCard(item,listElements);
 });
 //------------------------------------------------------------------------------//
 
@@ -137,14 +97,12 @@ closeCardAddPopup.addEventListener('click', () => {
 
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
-  disableButton(e.submitter,config)
-  // e.submitter.disabled = true;
-  // e.submitter.classList.add('popup__button_disabled')
+
   const card = {
     name: popupPlace.value,
     link: popupPlaceLink.value
   }
-  renderCard(card)
+  renderCard(card,listElements)
   closePopup(popupCardAdd);
  e.target.reset();
 }
@@ -170,3 +128,9 @@ const closePopupByClickOnOverlay = (e) => {
   }
 }
 popupElements.forEach((element) => element.addEventListener('click', closePopupByClickOnOverlay));
+
+const popupProfileFormValidator = new FormValidator(config, popupProfileEdit);
+popupProfileFormValidator.enableValidation();
+
+const popupCardFormValidator = new FormValidator(config, addFormElement);
+popupCardFormValidator.enableValidation();
