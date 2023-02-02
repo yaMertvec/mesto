@@ -1,9 +1,9 @@
 class Card {
-  constructor(item, cardTemplate, handleOpenImagePopup) {
+  constructor(item, cardTemplate,handleCardClick) {
     this._name = item.name;
     this._link = item.link;
     this._cardTemplate = cardTemplate;
-    this._handleOpenImagePopup = handleOpenImagePopup;
+    this._handleCardClick = handleCardClick;
 
   }
   _getTemplate() {
@@ -38,9 +38,16 @@ class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-      this._handleOpenImagePopup(this._name, this._link);
+      this._handleCardClick(this._name, this._link);
     });
 
+  }
+  _handleCardClick() {
+    const popupImageElement = this._card.querySelector('.popup__image-element');
+    const popupDescription = this._card.querySelector('.popup__description');
+    popupImageElement.src = this._link;
+    popupImageElement.alt = this._name;
+    popupDescription.textContent = this._name;
   }
 
   _handleLikeButton() {
