@@ -1,10 +1,15 @@
 class Card {
+<<<<<<< HEAD
   constructor(item, cardTemplate, handleCardClick, openDeleteConfirmation, handleLikeButton, id, userId) {
     this.item = item
+=======
+  constructor(item, cardTemplate,handleCardClick) {
+>>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
     this._name = item.name;
     this._link = item.link;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
+<<<<<<< HEAD
     this._openDeleteConfirmation = openDeleteConfirmation;
     this._likes = item.likes;
     this.handleLikeButton = handleLikeButton;
@@ -16,6 +21,10 @@ class Card {
   // _checkLikeId() {
   //   return this._likes.find(like => like._id == this._myId)
   // }
+=======
+
+  }
+>>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
   _getTemplate() {
     const card = document
       .querySelector(this._cardTemplate)
@@ -27,6 +36,7 @@ class Card {
   }
   generateCard() {
     this._card = this._getTemplate();
+<<<<<<< HEAD
     this._cardLikeButton = this._card.querySelector('.card__like-button');
     this._cardImage = this._card.querySelector('.card__image');
     this._cardTitle = this._card.querySelector('.card__title');
@@ -59,6 +69,26 @@ class Card {
 
     this._deleteButton.addEventListener('click', () => {
       this._openDeleteConfirmation(this);
+=======
+    this._cardLikeButton = this._card.querySelector('.card__like-button')
+    this._cardImage = this._card.querySelector('.card__image');
+    this._cardTitle = this._card.querySelector('.card__title');
+    this._setEventListeners();
+    this._cardTitle.textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    return this._card;
+  }
+
+  _setEventListeners() {
+
+    this._cardLikeButton.addEventListener('click', () => {
+      this._handleLikeButton()
+    });
+
+    this._card.querySelector('.card__delete-button').addEventListener('click', () => {
+      this._handleDeleteButton();
+>>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
     });
 
     this._cardImage.addEventListener('click', () => {
@@ -74,6 +104,7 @@ class Card {
     popupDescription.textContent = this._name;
   }
 
+<<<<<<< HEAD
 
   // handleLikeButton() {
   //   this._cardLikeButton.classList.toggle('card__like-button_active');
@@ -124,6 +155,17 @@ class Card {
 
 }
 
+=======
+  _handleLikeButton() {
+    this._cardLikeButton.classList.toggle('card__like-button_active');
+  }
+
+  _handleDeleteButton() {
+    this._card.remove();
+    this._card = null
+  }
+}
+>>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 export { Card }
 
 
