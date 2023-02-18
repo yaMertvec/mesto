@@ -1,5 +1,4 @@
 export class UserInfo {
-<<<<<<< HEAD
   constructor({ nameSelector, infoSelector,avatarSelector }) {
     this._nameElement = document.querySelector(nameSelector)
     this._infoElement = document.querySelector(infoSelector)
@@ -20,20 +19,5 @@ export class UserInfo {
   }
   getId() {
     return this._id
-=======
-  constructor({ nameSelector, infoSelector }) {
-    this._nameElement = document.querySelector(nameSelector)
-    this._infoElement = document.querySelector(infoSelector)
-  }
-  getUserInfo() {
-   return {
-  name : this._nameElement.textContent,
-  info : this._infoElement.textContent,
-  }}
-
-  setUserInfo({ userName, userJob }) {
-    this._nameElement.textContent = userName;
-    this._infoElement.textContent = userJob
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
   }
 }

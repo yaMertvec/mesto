@@ -7,11 +7,8 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import '../pages/index.css';
-<<<<<<< HEAD
 import { Api } from "../components/Api.js";
 import { PopupDeleteConfirmation } from "../components/PopupDeleteConfirmation.js";
-=======
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 //-------------------------------переменные----------------------//
 // const popupElement = document.querySelector('.popup');
 const popupProfileEdit = document.querySelector('.popup_type-edit');
@@ -21,7 +18,6 @@ const formAddElement = document.querySelector('.popup__add');
 const nameInput = formEditElement.querySelector('.popup__input_data_name');
 const jobInput = formEditElement.querySelector('.popup__input_data_job');
 const openAddCardButton = document.querySelector('.profile__add-button');
-<<<<<<< HEAD
 const listElements = document.querySelector('.elements');
 const profileImage = document.querySelector('.profile__avatar')
 
@@ -51,31 +47,6 @@ const cardList = new Section({
     const card = new Card(item, `#card-template`, handleOpenImagePopup, openDeleteConfirmation, handleLikeClick, handleDeleteCardFormSubmit, userInfo.getId());
     const newCard = card.generateCard();
     return newCard
-=======
-
-const listElements = document.querySelector('.elements');
-
-
-
-
-
-
-const createCard = (item) => {
-  const card = new Card(item, `#card-template`, handleOpenImagePopup)
-  const newCard = card.generateCard();
-  return newCard
-}
-
-initialCards.forEach((item) => {
-  listElements.prepend(createCard(item));
-});
-
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const newCard = createCard(item);
-    cardList.addItem(newCard);
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
   },
 }, '.elements'
 );
@@ -87,7 +58,6 @@ function handleOpenImagePopup(name, link) {
   popupImage.open(name, link);
 }
 
-<<<<<<< HEAD
 
 const handleCardFormSubmit = (cardData) => {
   popupCard.renderLoading(true);
@@ -176,40 +146,13 @@ const userInfo = new UserInfo({
   nameSelector: '.profile__title',
   infoSelector: '.profile__subtitle',
   avatarSelector: '.profile__avatar'
-=======
-const handleCardFormSubmit = (formValues) => {
-  const cardItem = {
-    name: formValues.placeName,
-    link: formValues.placeLink
-  }
-  const newCard = createCard(cardItem)
-  cardList.addItem(newCard);
-  popupCard.close()
-}
-const userInfo = new UserInfo({
-  nameSelector: '.profile__title',
-  infoSelector: '.profile__subtitle'
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 })
 const popupProfile = new PopupWithForm('.popup_type-edit', handleFormEditSubmit);
 popupProfile.setEventListeners();
 
-<<<<<<< HEAD
 const popupCard = new PopupWithForm('.popup_card-add', handleCardFormSubmit)
 popupCard.setEventListeners();
 
-=======
-
-const popupCard = new PopupWithForm('.popup_card-add', handleCardFormSubmit)
-popupCard.setEventListeners();
-
-function handleFormEditSubmit(formValues) {
-  userInfo.setUserInfo(formValues);
-  popupProfile.close();
-}
-
-
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 popupOpenProfileEdit.addEventListener('click', function () {
   const userData = userInfo.getUserInfo()
   nameInput.value = userData.name;
@@ -218,17 +161,12 @@ popupOpenProfileEdit.addEventListener('click', function () {
   popupProfile.open()
 })
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 //--------------------открываем и закрываем попап с добавлением карточки ---------------//
 openAddCardButton.addEventListener('click', () => {
   popupCardFormValidator.resetValidation();
   popupCard.open();
 })
 
-<<<<<<< HEAD
 profileImage.addEventListener('click', () => {
   popupChangeAvatar.open()
 })
@@ -266,13 +204,3 @@ const handleChangeAvatarFormSubmit = (formValues) => {
 
 const popupChangeAvatar = new PopupWithForm('.popup_new-avatar', handleChangeAvatarFormSubmit);
 popupChangeAvatar.setEventListeners();
-=======
-
-const popupProfileFormValidator = new FormValidator(config, popupProfileEdit);
-popupProfileFormValidator.enableValidation();
-popupProfileFormValidator.resetValidation()
-
-const popupCardFormValidator = new FormValidator(config, formAddElement);
-popupCardFormValidator.enableValidation();
-popupCardFormValidator.resetValidation()
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87

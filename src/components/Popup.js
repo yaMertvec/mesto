@@ -1,8 +1,4 @@
-<<<<<<< HEAD
  export class Popup {
-=======
- class Popup {
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this)
@@ -34,7 +30,3 @@
     });
   }
 }
-<<<<<<< HEAD
-=======
-export { Popup }
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87

@@ -12,10 +12,7 @@
 /*------------------profile---------------*/
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
-<<<<<<< HEAD
 @import url(../blocks/profile/__change-avatar/profile__change-avatar.css);
-=======
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__container/profile__conainer.css);
 @import url(../blocks/profile/__title/profile__title.css);
@@ -33,14 +30,10 @@
 @import url(../blocks/card/__like-button/card__like-button.css);
 @import url(../blocks/card/__like-button/_active/card__like-button_active.css);
 @import url(../blocks/card/__delete-button/card__delete-button.css);
-<<<<<<< HEAD
 @import url(../blocks/card/__delete-button/_hide/card__delete-button_hide.css);
 @import url(../blocks/card/__select-button/card__select-button.css);
 @import url(../blocks/card/__like-counter/card__like-counter.css);
 @import url(../blocks/card/__like-group/card__like-group.css);
-=======
-@import url(../blocks/card/__select-button/card__select-button.css);
->>>>>>> 3917d6fe9ca259db4071796672c1ac4da3e1de87
 
 
 /*------------------------popup-----------------*/
