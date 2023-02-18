@@ -5,7 +5,7 @@ export class Api {
   }
   _checkResponse(res) {
     if (res.ok) {
-      return res.json()
+      return res.json();
     }
     return Promise.reject(`Ошибка:${res.status}`);
   }
@@ -15,52 +15,51 @@ export class Api {
   }
 
   getUserInfo() {
-    return this._request(`${this._baseUrl}/users/me`,
-      {
-        method: 'GET',
-        headers: this._headers
-      })
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: this._headers,
+    });
   }
 
   getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, {
-      headers: this._headers
-    })
+      headers: this._headers,
+    });
   }
 
   sendUserInfo(userData) {
     return this._request(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: `${userData.userName}`,
-        about: `${userData.userJob}`
-      })
-    })
+        about: `${userData.userJob}`,
+      }),
+    });
   }
   sendNewCardInfo(formValues) {
     return this._request(`${this._baseUrl}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: `${formValues.placeName}`,
-        link: `${formValues.placeLink}`
-      })
-    })
+        link: `${formValues.placeLink}`,
+      }),
+    });
   }
 
   deleteCard(id) {
     return this._request(`${this._baseUrl}/cards/${id}`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
+      method: "DELETE",
+      headers: this._headers,
+    });
   }
 
-  setCardLike(id,method) {
+  setCardLike(id, method) {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
       method: method,
-      headers: this._headers
-    })
+      headers: this._headers,
+    });
   }
 
   // deleteCardLike(id) {
@@ -72,13 +71,11 @@ export class Api {
 
   changeAvatar(formValues) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: formValues.url
-      })
-    })
+        avatar: formValues.url,
+      }),
+    });
   }
-};
-
-
+}

@@ -4,8 +4,8 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
   renderItems(items) {
-    items.reverse().forEach(item => {
-      this.addItem(item)
+    items.reverse().forEach((item) => {
+      this.addItem(item);
     });
   }
   addItem(item) {
