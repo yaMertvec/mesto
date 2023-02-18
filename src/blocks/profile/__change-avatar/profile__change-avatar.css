@@ -1,0 +1,18 @@
+.profile__change-avatar {
+  background: #2a2c2f;
+  background-image: url(../../../images/avatarEdit.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media screen and (max-width:450px) {
+  .profile__change-avatar {
+    margin-bottom: 20px;
+  }
+}
